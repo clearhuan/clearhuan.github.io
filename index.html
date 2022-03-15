@@ -218,6 +218,19 @@
       .container .arrow .up {
         animation: circle 2.5s linear infinite;
       }
+      .citys{
+        width: 311px;
+        margin: 0 auto;
+        margin-top: 49px;
+        line-height: 23px;
+        font-size: 17px;
+      }
+      .gray{
+        color: #7e8c8d;
+      }
+      .weight{
+        font-weight: 600;
+      }
     </style>
   </head>
   <body>
@@ -227,6 +240,10 @@
       </div>
       <div class="arrow">
         <img class="up" src="./arrow.png" alt="" />
+      </div>
+      <div class="citys">
+        <span class="gray">您于前14天内到达或途径：</span>
+        <span class="weight" id="city"></span>
       </div>
     </div>
 
@@ -249,9 +266,21 @@
           .replace(/ss/g, (s < 10 ? "0" : "") + s);
       };
 
+      const getUrlParam = (name) => {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+          return decodeURI(r[2]);
+        }
+        return null;
+      };
+
       document.querySelector("#time").innerText = `更新于：${dateFormater(
         "YYYY.MM.DD HH:mm:ss"
       )}`;
+
+
+      document.querySelector('#city').innerText = getUrlParam('city') ?? '广东省广州市'
     </script>
   </body>
 </html>
